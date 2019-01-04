@@ -5,7 +5,15 @@ module.exports = {
         browser: true,
       },
 
-      "parserOptions": { "ecmaVersion": 6 } 
-    }
+      "parserOptions": { "ecmaVersion": 6 }, 
+
+ rules:{
+
+    "no-console": 0
+
+ }
+}
+
+
 
   
