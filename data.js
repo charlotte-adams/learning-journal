@@ -1,6 +1,7 @@
 var data = [
     {
       id: 0,
+      title: 'One',
       author: "Charlotte",
       createdOn: "2019-01-02",
       body: `No worries. No cares. Just float and wait for the wind to blow you around. Just use the old one inch brush. Now we don't want him to get lonely, so we'll give him a little friend. In life you need colors.
@@ -19,6 +20,7 @@ var data = [
     },
     {
       id: 1,
+      title: 'Two',
       author: "Dan",
       createdOn: "2018-12-28",
       body: `So often we avoid running water, and running water is a lot of fun. There it is. Mix your color marbly don't mix it dead. The little tiny Tim easels will let you down.
@@ -33,6 +35,7 @@ var data = [
     },
     {
       id: 2,
+      title: 'Three',
       author: "Charlotte",
       createdOn: "2018-12-29",
       body: `Isn't that fantastic? You can just push a little tree out of your brush like that. Sometimes you learn more from your mistakes than you do from your masterpieces. I get carried away with this brush cleaning. Son of a gun. We spend so much of our life looking - but never seeing.
@@ -48,6 +51,7 @@ var data = [
     },
     {
       id: 3,
+      title: 'Four',
       author: "Charlotte",
       createdOn: "2018-12-12",
       body: `Almost everything is going to happen for you automatically - you don't have to spend any time working or worrying. The only thing worse than yellow snow is green snow. I will take some magic white, and a little bit of Vandyke brown and a little touch of yellow.
