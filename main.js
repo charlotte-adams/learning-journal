@@ -38,15 +38,24 @@ BlogPost.prototype.renderAuthor= function(parent) {
 
     var author = document.createElement('div');
     author.className = 'post-author';
-    author.textContent = this.author;
+    author.textContent = `Author: ${this.author}`;
     parent.appendChild(author);
 }
+
+BlogPost.prototype.renderTags=function(parent) {
+    
+    var tags = document.createElement('span');
+    tags.className = 'post-tags';
+    tags.textContent= `Key Words: ${this.tags}`;
+    parent.appendChild(tags);
+}
+
 
 BlogPost.prototype.renderCreatedOn= function(parent) {
     
     var createdOn = document.createElement('span');
     createdOn.className = 'date-created';
-    createdOn.textContent = this.createdOn;
+    createdOn.textContent = `Published On: ${this.createdOn}`;
     parent.appendChild(createdOn)
 
 }
@@ -60,13 +69,6 @@ BlogPost.prototype.renderBody= function(parent) {
 
 }
 
-BlogPost.prototype.renderTags=function(parent) {
-    
-    var tags = document.createElement('span');
-    tags.className = 'post-tags';
-    tags.textContent= this.tags;
-    parent.appendChild(tags);
-}
 
 
 var allPosts = [];
