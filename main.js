@@ -38,7 +38,7 @@ BlogPost.prototype.renderAuthor= function(parent) {
 
     var author = document.createElement('div');
     author.className = 'post-author';
-    author.textContent = `Author: ${this.author}`;
+    author.textContent = `By: ${this.author}`;
     parent.appendChild(author);
 }
 
@@ -55,7 +55,7 @@ BlogPost.prototype.renderCreatedOn= function(parent) {
     
     var createdOn = document.createElement('span');
     createdOn.className = 'date-created';
-    createdOn.textContent = `Published On: ${this.createdOn}`;
+    createdOn.textContent = `Publish Date: ${this.createdOn}`;
     parent.appendChild(createdOn)
 
 }
