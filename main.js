@@ -68,9 +68,11 @@ BlogPost.prototype.renderCreatedOn= function(parent) {
 BlogPost.prototype.renderBody= function(parent) {
     
     var body = document.createElement('p');
-    body.className = 'post-body'
-    body.textContent= this.body;
-    parent.appendChild(body);
+    body.className = 'post-body';
+    var md = window.markdownit();
+    var result = md.render(this.body);
+    parent.innerHTML = result;
+    
 
 }
 
