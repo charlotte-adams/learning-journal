@@ -10,6 +10,10 @@ function BlogPost(id, title, author, createdOn, body, tags) {
 }
 
 
+
+
+
+
 BlogPost.prototype.renderSinglePost= function() {
     var  allPostsContainer = document.getElementById('all-posts');
     var singlePostDiv = document.createElement('div');
@@ -55,7 +59,8 @@ BlogPost.prototype.renderCreatedOn= function(parent) {
     
     var createdOn = document.createElement('span');
     createdOn.className = 'date-created';
-    createdOn.textContent = `Publish Date: ${this.createdOn}`;
+    var formattedDate = renderDate(this.createdOn);
+    createdOn.textContent = `Publish Date: ${formattedDate}`;
     parent.appendChild(createdOn)
 
 }
@@ -68,6 +73,18 @@ BlogPost.prototype.renderBody= function(parent) {
     parent.appendChild(body);
 
 }
+
+function renderDate(date) {
+var datePieces = date.split('-');
+var [year, month, day] = datePieces;
+return `${month} - ${day} - ${year}`;
+
+}
+
+
+
+
+
 
 
 
@@ -83,8 +100,8 @@ allPosts.forEach(function(post) {
 })
 
 
-
-
+var today = new Date();
+console.log(today);
 
 
 
