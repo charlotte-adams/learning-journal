@@ -1,8 +1,8 @@
 var data = [
     {
       id: 0,
-      title: 'One',
-      author: "Charlotte",
+      title: 'One',  
+      author: "Charlotte Mickey Mouse", 
       createdOn: "2019-01-02",
       body: `No worries. No cares. Just float and wait for the wind to blow you around. Just use the old one inch brush. Now we don't want him to get lonely, so we'll give him a little friend. In life you need colors.
       When things happen - enjoy them. They're little gifts. Just a happy little shadow that lives in there. Little trees and bushes grow however makes them happy. They say everything looks better with odd numbers of things. But sometimes I put even numbers—just to upset the critics. It's all a game of angles.
@@ -20,8 +20,8 @@ var data = [
     },
     {
       id: 1,
-      title: 'Two',
-      author: "Dan",
+      title: 'Two', 
+      author: "Dan",  
       createdOn: "2018-12-28",
       body: `So often we avoid running water, and running water is a lot of fun. There it is. Mix your color marbly don't mix it dead. The little tiny Tim easels will let you down.
       If you hypnotize it, it will go away. Don't be afraid to make these big decisions. Once you start, they sort of just make themselves. Let all these things just sort of happen. Clouds are free. They just float around the sky all day and have fun. I get carried away with this brush cleaning. All you need to paint is a few tools, a little instruction, and a vision in your mind.
@@ -35,8 +35,8 @@ var data = [
     },
     {
       id: 2,
-      title: 'Three',
-      author: "Charlotte",
+      title: 'Three and three and three and three and three three',  
+      author: "Charlotte", 
       createdOn: "2018-12-29",
       body: `Isn't that fantastic? You can just push a little tree out of your brush like that. Sometimes you learn more from your mistakes than you do from your masterpieces. I get carried away with this brush cleaning. Son of a gun. We spend so much of our life looking - but never seeing.
       
@@ -51,13 +51,13 @@ var data = [
     },
     {
       id: 3,
-      title: 'Four',
-      author: "Charlotte",
+      title: 'Four', 
+      author: "Charlotte", 
       createdOn: "2018-12-12",
       body: `Almost everything is going to happen for you automatically - you don't have to spend any time working or worrying. The only thing worse than yellow snow is green snow. I will take some magic white, and a little bit of Vandyke brown and a little touch of yellow.
       You can't have light without dark. You can't know happiness unless you've known sorrow. If there's two big trees invariably sooner or later there's gonna be a little tree. A tree cannot be straight if it has a crooked trunk. God gave you this gift of imagination. Use it.
       
       Let's just drop a little Evergreen right here. It's a good way of getting rid of all your anxieties and hostilities. Just beat the devil out of it.`,
-      tags: ["trees", "snow"]
+      tags: ["trees", "snow"],
     }
 ];
