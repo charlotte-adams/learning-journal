@@ -1,4 +1,4 @@
-var allPosts = [];
+const allPosts = [];
 function BlogPost(id, title, author, createdOn, body, tags) {
   this.id = id;
   this.title = title;
@@ -9,8 +9,8 @@ function BlogPost(id, title, author, createdOn, body, tags) {
 }
 
 BlogPost.prototype.renderSinglePost = function() {
-  var allPostsContainer = document.getElementById("all-posts-container");
-  var singlePostDiv = document.createElement("div");
+  const allPostsContainer = document.getElementById("all-posts-container");
+  const singlePostDiv = document.createElement("div");
   allPostsContainer.className = "all-posts";
   singlePostDiv.className = "post-container";
 
@@ -24,52 +24,52 @@ BlogPost.prototype.renderSinglePost = function() {
 };
 
 BlogPost.prototype.renderTitle = function(parent) {
-  var title = document.createElement("h2");
+  const title = document.createElement("h2");
   title.className = "post-title";
   title.textContent = this.title;
   parent.appendChild(title);
 };
 
 BlogPost.prototype.renderAuthor = function(parent) {
-  var author = document.createElement("div");
+  const author = document.createElement("div");
   author.className = "post-author";
   author.textContent = `By: ${this.author}`;
   parent.appendChild(author);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
-  var tags = document.createElement("span");
+  const tags = document.createElement("span");
   tags.className = "post-tags";
   tags.textContent = `Key Words: ${this.tags}`;
   parent.appendChild(tags);
 };
 
 BlogPost.prototype.renderCreatedOn = function(parent) {
-  var createdOn = document.createElement("span");
+  const createdOn = document.createElement("span");
   createdOn.className = "date-created";
-  var formattedDate = renderDate(this.createdOn);
+  const formattedDate = renderDate(this.createdOn);
   createdOn.textContent = `Publish Date: ${formattedDate}`;
   parent.appendChild(createdOn);
 };
 
 BlogPost.prototype.renderBody = function(parent) {
-  var body = document.createElement("div");
+  const body = document.createElement("div");
   body.className = "post-body";
-  var md = window.markdownit();
-  var result = md.render(this.body);
+  const md = window.markdownit();
+  const result = md.render(this.body);
   body.innerHTML = result;
   parent.appendChild(body);
 };
 
 function renderDate(date) {
-  var datePieces = date.split("-");
-  var [year, month, day] = datePieces;
+  const datePieces = date.split("-");
+  const [year, month, day] = datePieces;
   return `${month} - ${day} - ${year}`;
 }
 
 function createNewBlog() {
   data.forEach(function(element) {
-    var newBlog = new BlogPost(
+    const newBlog = new BlogPost(
       element.id,
       element.title,
       element.author,
