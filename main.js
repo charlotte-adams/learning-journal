@@ -9,11 +9,6 @@ function BlogPost(id, title, author, createdOn, body, tags) {
     this.tags = tags;
 }
 
-
-
-
-
-
 BlogPost.prototype.renderSinglePost= function() {
     var  allPostsContainer = document.getElementById('all-posts-container');
     var singlePostDiv = document.createElement('div');
@@ -74,7 +69,6 @@ BlogPost.prototype.renderBody= function(parent) {
     body.innerHTML = result;
     parent.appendChild(body);
     
-
 }
 
 function renderDate(date) {
@@ -82,15 +76,6 @@ function renderDate(date) {
     var [year, month, day] = datePieces;
     return `${month} - ${day} - ${year}`;
 }
-
-
-
-
-
-
-
-
-
 
 var allPosts = [];
 data.forEach(function(element) {
