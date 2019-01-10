@@ -1,42 +1,61 @@
 
+ 
+body{
+font-family: 'Merriweather', serif;
 
-body {
-
-    font-family: 'Merriweather', serif;
 }
 .main-nav {
     padding: 20px;
     font-size:20px;
     border: solid black 1px;
-    
+    background-color: lightseagreen;
+ 
+  
 }
+
 .nav-link {
-    padding-right: 10px;
+    padding-right: 20px;
+    color: black;
+    text-decoration: none;
+   
 }
+
 
 .nav-link:last-of-type {
     padding-right: 0;
+    width: 30px;
+  
 }
-
-.page-title {
-    background-color: lightskyblue;
+.title-container{
+    background-color: lightcyan;
     text-align: center;
     margin: 10px;
     padding: 10px;
     font-family: 'Pacifico', cursive;
-
 }
-.entire-blog {
+
+.all-posts-container {
+    margin: 20px;
+    width: 600px;
+}
+.post-container {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+.post-body {
+    max-width: 650px;
+}
+
+.sidebar-container {
+   
     margin: 20px;
 }
 
-.post-container {
-    border-bottom: 1px solid black;
-   padding-bottom: 5px;
+.sidebar-quote{
+    text-align: center;
 }
-
-.post-body {
-    max-width: 650px;
+.sidebar-content {
+    padding: 5px;
 }
 
 @media(min-width: 600px) {
@@ -46,8 +65,19 @@ body {
     .post-container {
         margin: 20px 10px 20px 10px;
      }
+
+   .all-posts-page {
+        display: flex;
+    }
+    .sidebar-container {
+        width: 200px;
+        border: 3px solid lightseagreen;
+    }   
    .post-title {
-       background-color: aqua;
+       text-align: center;
    }
-        
- }
+    
+     
+}
+
+ 
