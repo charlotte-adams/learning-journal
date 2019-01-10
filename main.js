@@ -1,5 +1,5 @@
 
-
+var allPosts = [];
 function BlogPost(id, title, author, createdOn, body, tags) {
     this.id = id;
     this.title = title;
@@ -76,22 +76,23 @@ function renderDate(date) {
     return `${month} - ${day} - ${year}`;
 }
 
-var allPosts = [];
-data.forEach(function(element) {
-    var newBlog = new BlogPost(element.id, element.title, element.author, element.createdOn, element.body, element.tags);
-    allPosts.push(newBlog);
-})
+function createNewBlog() {
+   data.forEach(function() { 
+        var newBlog = new BlogPost(element.id, element.title, element.author, element.createdOn, element.body, element.tags);
+        allPosts.push(newBlog); 
+   })
 
-allPosts.forEach(function(post) {
-    post.renderSinglePost();
-
-})
+}
 
 
-var today = new Date();
-console.log(today);
+function renderAllPosts() {
+    allPosts.forEach(function(post) {
+        post.renderSinglePost();
+    })
 
-
+}
+createNewBlog();
+renderAllPosts();
 
 
 
