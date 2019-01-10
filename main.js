@@ -15,9 +15,9 @@ function BlogPost(id, title, author, createdOn, body, tags) {
 
 
 BlogPost.prototype.renderSinglePost= function() {
-    var  allPostsContainer = document.getElementById('all-posts');
+    var  allPostsContainer = document.getElementById('all-posts-container');
     var singlePostDiv = document.createElement('div');
-    allPostsContainer.className = 'entire-blog';
+    allPostsContainer.className = 'all-posts';
     singlePostDiv.className = 'post-container';
 
         this.renderTitle(singlePostDiv);
@@ -67,21 +67,23 @@ BlogPost.prototype.renderCreatedOn= function(parent) {
 
 BlogPost.prototype.renderBody= function(parent) {
     
-    var body = document.createElement('p');
+    var body = document.createElement('div');
     body.className = 'post-body';
     var md = window.markdownit();
     var result = md.render(this.body);
-    parent.innerHTML = result;
+    body.innerHTML = result;
+    parent.appendChild(body);
     
 
 }
 
 function renderDate(date) {
-var datePieces = date.split('-');
-var [year, month, day] = datePieces;
-return `${month} - ${day} - ${year}`;
-
+    var datePieces = date.split('-');
+    var [year, month, day] = datePieces;
+    return `${month} - ${day} - ${year}`;
 }
+
+
 
 
 
