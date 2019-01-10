@@ -77,7 +77,7 @@ function renderDate(date) {
 }
 
 function createNewBlog() {
-   data.forEach(function() { 
+   data.forEach(function(element) { 
         var newBlog = new BlogPost(element.id, element.title, element.author, element.createdOn, element.body, element.tags);
         allPosts.push(newBlog); 
    })
@@ -95,7 +95,7 @@ createNewBlog();
 renderAllPosts();
 
 
-
+    
 
 
 
