@@ -49,7 +49,6 @@ BlogPost.prototype.renderTags=function(parent) {
     parent.appendChild(tags);
 }
 
-
 BlogPost.prototype.renderCreatedOn= function(parent) {
     
     var createdOn = document.createElement('span');
