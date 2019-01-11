@@ -1,4 +1,5 @@
 const allPosts = [];
+
 function BlogPost(id, title, author, createdOn, body, tags) {
   this.id = id;
   this.title = title;
@@ -86,5 +87,22 @@ function renderAllPosts() {
     post.renderSinglePost();
   });
 }
+
+const header = document.querySelector("header");
+
+function handleNav(event) {
+  const path = event.target.dataset.path;
+  hideAll();
+  const currentPage = document.getElementById(path);
+  currentPage.classList.remove("hidden");
+}
+function hideAll() {
+  const pages = document.querySelectorAll(".page");
+  pages.forEach(function(page) {
+    page.classList.add("hidden");
+  });
+}
+header.addEventListener("click", handleNav);
+
 createNewBlog();
 renderAllPosts();
