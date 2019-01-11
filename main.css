@@ -35,10 +35,15 @@ body {
 .post-body {
   max-width: 650px;
 }
-
+.home-page-container {
+  display: flex;
+}
 .sidebar-container {
   border: 3px solid lightseagreen;
   margin: 20px;
+}
+.sidebar-content {
+  background-color: red;
 }
 
 .sidebar-quote {
@@ -59,6 +64,10 @@ body {
   }
   .sidebar-container {
     width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 50;
+    right: 0;
   }
   .post-title {
     text-align: center;
