@@ -9,10 +9,8 @@ function BlogPost(id, title, author, createdOn, body, tags) {
   this.tags = tags;
 }
 
-BlogPost.prototype.renderSinglePost = function() {
-  const allPostsContainer = document.getElementById("all-posts-container");
+BlogPost.prototype.render = function(parent) {
   const singlePostDiv = document.createElement("div");
-  allPostsContainer.className = "all-posts";
   singlePostDiv.className = "post-container";
 
   this.renderTitle(singlePostDiv);
@@ -21,7 +19,7 @@ BlogPost.prototype.renderSinglePost = function() {
   this.renderBody(singlePostDiv);
   this.renderTags(singlePostDiv);
 
-  allPostsContainer.appendChild(singlePostDiv);
+  parent.appendChild(singlePostDiv);
 };
 
 BlogPost.prototype.renderTitle = function(parent) {
@@ -84,8 +82,14 @@ function createNewBlog() {
 
 function renderAllPosts() {
   allPosts.forEach(function(post) {
-    post.renderSinglePost();
+    const allPostsContainer = document.getElementById("all-posts-container");
+    post.render(allPostsContainer);
   });
+}
+function renderSinglePost() {
+  const post = allPosts[0];
+  const homePageWrap = document.getElementById("home-page-wrap");
+  post.render(homePageWrap);
 }
 
 const header = document.querySelector("header");
@@ -106,3 +110,4 @@ header.addEventListener("click", handleNav);
 
 createNewBlog();
 renderAllPosts();
+renderSinglePost();
