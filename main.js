@@ -111,3 +111,206 @@ header.addEventListener("click", handleNav);
 createNewBlog();
 renderAllPosts();
 renderSinglePost();
+
+// contact page form
+
+function submitForm(event) {
+  event.preventDefault();
+  var formIsValid = validateForm(event);
+  if (!formIsValid) {
+    return false;
+  }
+  renderUserInputAll(event);
+}
+
+function validateForm(event) {
+  var firstNameIsValid = validateFirstName(event);
+  if (!firstNameIsValid) {
+    return false;
+  }
+
+  var lastNameIsValid = validateLastName(event);
+  if (!lastNameIsValid) {
+    return false;
+  }
+
+  var addressIsValid = validateAddress(event);
+  if (!addressIsValid) {
+    return false;
+  }
+
+  var cityIsValid = validateCity(event);
+  if (!cityIsValid) {
+    return false;
+  }
+
+  var stateIsValid = validateState(event);
+  if (!stateIsValid) {
+    return false;
+  }
+
+  var zipcodeIsValid = validateZipcode(event);
+  if (!zipcodeIsValid) {
+    return false;
+  }
+
+  var emailIsValid = validateEmail(event);
+  if (!emailIsValid) {
+    return false;
+  }
+
+  var phoneIsValid = validatePhoneNumber(event);
+  if (!phoneIsValid) {
+    return false;
+  }
+
+  var passwordIsValid = validatePassword(event);
+  if (!passwordIsValid) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+var userform = document.querySelector("form");
+userform.addEventListener("submit", submitForm);
+
+function renderUserInputEach(value) {
+  var printParent = document.getElementById("print");
+
+  var eachInputField = document.createElement("div");
+  eachInputField.textContent = value;
+  printParent.appendChild(eachInputField);
+}
+
+function renderUserInputAll(event) {
+  var firstLineContent = ` Thank you for registering. You have created an account as:
+        ${event.target.firstname.value} ${event.target.lastname.value}`;
+
+  var secondLineContent = `Your contact information:`;
+
+  var thirdLineContent = `Address: ${event.target.address.value} ${
+    event.target.city.value
+  }
+        ${event.target.state.value} ${event.target.zipcode.value}`;
+
+  var fourthLineContent = `Phone: ${event.target.phone.value}`;
+
+  var fifthLineContent = `Email: ${event.target.email.value}`;
+
+  renderUserInputEach(firstLineContent);
+  renderUserInputEach(secondLineContent);
+  renderUserInputEach(thirdLineContent);
+  renderUserInputEach(fourthLineContent);
+  renderUserInputEach(fifthLineContent);
+}
+
+function validateFirstName(event) {
+  var first = event.target.firstname.value;
+
+  if (!first.match(/^[a-zA-Z]+$/)) {
+    alert("Only letters are allowed for first name.");
+    return false;
+  }
+
+  return true;
+}
+
+function validateLastName(event) {
+  var last = event.target.lastname.value;
+
+  if (!last.match(/^[a-zA-Z]+$/)) {
+    alert("Only letters are allowed for last name.");
+    return false;
+  }
+
+  return true;
+}
+
+function validateAddress(event) {
+  var address = event.target.address.value;
+
+  if (address.length == 0) {
+    alert("Address is required");
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validateCity(event) {
+  var city = event.target.city.value;
+
+  if (city !== null && city !== "") {
+    return true;
+  } else {
+    alert("City is required");
+    return false;
+  }
+}
+
+function validateState(event) {
+  var state = event.target.state.value;
+
+  if (state.length === 2 && state.match(/^[a-zA-Z]+$/)) {
+    return true;
+  } else {
+    alert("2 letters required for state");
+    return false;
+  }
+}
+
+function validateZipcode(event) {
+  var zipcode = event.target.zipcode.value;
+
+  if (zipcode.length === 5 && zipcode.match(/^\d+/)) {
+    return true;
+  } else {
+    alert("5 numeric characters required for zipcode");
+    return false;
+  }
+}
+
+function validatePhoneNumber(event) {
+  var phone = event.target.phone.value;
+
+  if (phone.match(/^[0-9]{10}$/)) {
+    return true;
+  } else {
+    alert("10 numeric characters required for phone number");
+    return false;
+  }
+}
+
+function validateEmail(event) {
+  var emailID = event.target.email.value;
+  var atpos = emailID.indexOf("@");
+  var dotpos = emailID.lastIndexOf(".");
+
+  if (atpos < 1 || dotpos - atpos < 2) {
+    alert("Please enter correct email ID");
+    return false;
+  }
+  return true;
+}
+
+function validatePassword(event) {
+  var verifyPswd = event.target.password.value;
+  var confirmPswd = event.target.confirm_password.value;
+
+  if (verifyPswd.length < 8) {
+    alert("Password must be minimum 8 characters.");
+    return false;
+  }
+
+  if (confirmPswd.length < 8) {
+    alert("Confirm Password must be minimum 8 characters.");
+    return false;
+  }
+  if (verifyPswd == confirmPswd) {
+    return true;
+  } else {
+    alert("Please verify Password and Confirm Password match");
+    return false;
+  }
+}

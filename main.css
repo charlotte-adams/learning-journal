@@ -85,3 +85,82 @@ body {
     display: none;
   }
 }
+
+/* contact page form....................................................................... */
+h1 {
+  text-align: center;
+  margin: 0 auto;
+  width: 400px;
+}
+
+form {
+  /* Just to center the form on the page */
+  margin: 0 auto;
+  width: 500px;
+  /* To see the outline of the form */
+  padding: 1em;
+  border: 3px solid aqua;
+  border-radius: 1em;
+}
+
+label {
+  /* labels display on top of field. */
+  display: block;
+}
+
+#print {
+  /* this is the div where user input prints after submit */
+  margin: auto;
+  width: 500px;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: aquamarine;
+}
+
+.wrapper {
+  /* this is the outer div */
+  margin-top: 1em;
+}
+
+.inner_container {
+  /* this holds the form field */
+
+  display: inline-block;
+  margin: 1em;
+}
+
+.button {
+  text-align: center;
+}
+
+#address {
+  width: 166px;
+}
+
+#city {
+  width: 80px;
+}
+
+#state {
+  width: 30px;
+}
+
+#zipcode {
+  width: 50px;
+}
+
+input,
+textarea {
+  /* To make sure that all text fields have the same font settings
+By default, textareas have a monospace font */
+  font: 1em sans-serif;
+
+  /* To harmonize the look & feel of text field border */
+  border: 1px solid #999;
+}
+
+input:focus {
+  background-color: lightblue;
+}
+
+/* This project is unfinished */

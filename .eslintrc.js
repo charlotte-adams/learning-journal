@@ -1,20 +1,14 @@
 module.exports = {
-    extends: ['eslint:recommended'],
-    
-    env: {
-        browser: true,
-      },
+  extends: ["eslint:recommended"],
 
-      "parserOptions": { "ecmaVersion": 6 }, 
+  env: {
+    browser: true,
+  },
 
- rules:{
+  parserOptions: { ecmaVersion: 6 },
 
+  rules: {
     "no-console": 0,
-    "indent": [ "warning", 2]
-
- }
-}
-
-
-
-  
+    indent: ["warning", 2],
+  },
+};
