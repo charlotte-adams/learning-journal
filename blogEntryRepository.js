@@ -22,4 +22,21 @@ class blogEntryRepository {
       [title, body, author, date, tags, userId]
     );
   }
+  update(blogEntry) {
+    const { id, title, body, author, date, tags, userId } = blogEntry;
+    return this.dao.run(
+      `UPDATE blogEntry,
+     SET title = ?,
+     body = ?,
+     author = ?, 
+     date = ?,
+     tags = ?, 
+     userId = ?
+     WHERE id = ?`,
+      [title, body, author, date, tags, userId, id]
+    );
+  }
+  delete(id) {
+    return this.dao.run(`DELETE FROM blogEntry WHERE id = ? `, [id]);
+  }
 }

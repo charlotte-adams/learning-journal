@@ -19,4 +19,17 @@ class userRepository {
       [username, email, password]
     );
   }
+  update(users) {
+    const { id, username, email, password } = user;
+    return this.dao.run(
+      `UPDATE users SET username = ?,
+      email = ?,
+      password = ? 
+      WHERE id = ?`,
+      [username, email, password, id]
+    );
+  }
+  delete(id) {
+    return this.dao.run(`DELETE FROM users WHERE id = ?`, [id]);
+  }
 }
