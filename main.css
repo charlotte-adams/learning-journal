@@ -133,22 +133,6 @@ label {
   text-align: center;
 }
 
-#address {
-  width: 166px;
-}
-
-#city {
-  width: 80px;
-}
-
-#state {
-  width: 30px;
-}
-
-#zipcode {
-  width: 50px;
-}
-
 input,
 textarea {
   /* To make sure that all text fields have the same font settings

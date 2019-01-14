@@ -124,43 +124,13 @@ function submitForm(event) {
 }
 
 function validateForm(event) {
-  var firstNameIsValid = validateFirstName(event);
-  if (!firstNameIsValid) {
-    return false;
-  }
-
-  var lastNameIsValid = validateLastName(event);
-  if (!lastNameIsValid) {
-    return false;
-  }
-
-  var addressIsValid = validateAddress(event);
-  if (!addressIsValid) {
-    return false;
-  }
-
-  var cityIsValid = validateCity(event);
-  if (!cityIsValid) {
-    return false;
-  }
-
-  var stateIsValid = validateState(event);
-  if (!stateIsValid) {
-    return false;
-  }
-
-  var zipcodeIsValid = validateZipcode(event);
-  if (!zipcodeIsValid) {
+  var userNameIsValid = validateUserName(event);
+  if (!userNameIsValid) {
     return false;
   }
 
   var emailIsValid = validateEmail(event);
   if (!emailIsValid) {
-    return false;
-  }
-
-  var phoneIsValid = validatePhoneNumber(event);
-  if (!phoneIsValid) {
     return false;
   }
 
@@ -177,109 +147,30 @@ userform.addEventListener("submit", submitForm);
 
 function renderUserInputEach(value) {
   var printParent = document.getElementById("print");
-
   var eachInputField = document.createElement("div");
   eachInputField.textContent = value;
   printParent.appendChild(eachInputField);
 }
 
 function renderUserInputAll(event) {
-  var firstLineContent = ` Thank you for registering. You have created an account as:
-        ${event.target.firstname.value} ${event.target.lastname.value}`;
-
-  var secondLineContent = `Your contact information:`;
-
-  var thirdLineContent = `Address: ${event.target.address.value} ${
-    event.target.city.value
-  }
-        ${event.target.state.value} ${event.target.zipcode.value}`;
-
-  var fourthLineContent = `Phone: ${event.target.phone.value}`;
-
-  var fifthLineContent = `Email: ${event.target.email.value}`;
+  var firstLineContent = ` Thank you ${
+    event.target.username.value
+  } for creating an account.`;
+  var secondLineContent = `Your Email is: ${event.target.email.value}`;
 
   renderUserInputEach(firstLineContent);
   renderUserInputEach(secondLineContent);
-  renderUserInputEach(thirdLineContent);
-  renderUserInputEach(fourthLineContent);
-  renderUserInputEach(fifthLineContent);
 }
 
-function validateFirstName(event) {
-  var first = event.target.firstname.value;
+function validateUserName(event) {
+  var username = event.target.username.value;
 
-  if (!first.match(/^[a-zA-Z]+$/)) {
-    alert("Only letters are allowed for first name.");
+  if (!username.match(/^[a-zA-Z]+$/)) {
+    alert("Only letters are allowed for User Name.");
     return false;
   }
 
   return true;
-}
-
-function validateLastName(event) {
-  var last = event.target.lastname.value;
-
-  if (!last.match(/^[a-zA-Z]+$/)) {
-    alert("Only letters are allowed for last name.");
-    return false;
-  }
-
-  return true;
-}
-
-function validateAddress(event) {
-  var address = event.target.address.value;
-
-  if (address.length == 0) {
-    alert("Address is required");
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function validateCity(event) {
-  var city = event.target.city.value;
-
-  if (city !== null && city !== "") {
-    return true;
-  } else {
-    alert("City is required");
-    return false;
-  }
-}
-
-function validateState(event) {
-  var state = event.target.state.value;
-
-  if (state.length === 2 && state.match(/^[a-zA-Z]+$/)) {
-    return true;
-  } else {
-    alert("2 letters required for state");
-    return false;
-  }
-}
-
-function validateZipcode(event) {
-  var zipcode = event.target.zipcode.value;
-
-  if (zipcode.length === 5 && zipcode.match(/^\d+/)) {
-    return true;
-  } else {
-    alert("5 numeric characters required for zipcode");
-    return false;
-  }
-}
-
-function validatePhoneNumber(event) {
-  var phone = event.target.phone.value;
-
-  if (phone.match(/^[0-9]{10}$/)) {
-    return true;
-  } else {
-    alert("10 numeric characters required for phone number");
-    return false;
-  }
 }
 
 function validateEmail(event) {
