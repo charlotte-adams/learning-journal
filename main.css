@@ -93,10 +93,14 @@ h1 {
   width: 400px;
 }
 
+h3 {
+  text-align: center;
+}
+
 form {
   /* Just to center the form on the page */
   margin: 0 auto;
-  width: 500px;
+  width: 250px;
   /* To see the outline of the form */
   padding: 1em;
   border: 3px solid aqua;
@@ -111,7 +115,7 @@ label {
 #print {
   /* this is the div where user input prints after submit */
   margin: auto;
-  width: 500px;
+  width: 250px;
   padding: 1em;
   border-radius: 1em;
   background-color: aquamarine;
@@ -120,17 +124,16 @@ label {
 .wrapper {
   /* this is the outer div */
   margin-top: 1em;
+  margin-right: 2em;
 }
 
 .inner_container {
   /* this holds the form field */
-
-  display: inline-block;
   margin: 1em;
 }
 
 .button {
-  text-align: center;
+  margin-left: 15px;
 }
 
 input,
