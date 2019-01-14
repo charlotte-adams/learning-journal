@@ -1,0 +1,23 @@
+{
+  "name": "sqlite",
+  "version": "0.1.0",
+  "description": "sqlite code",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlottewarfel/learning-journal.git"
+  },
+  "author": "charlotte warfel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charlottewarfel/learning-journal/issues"
+  },
+  "homepage": "https://github.com/charlottewarfel/learning-journal#readme",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "sqlite3": "^4.0.6"
+  }
+}
