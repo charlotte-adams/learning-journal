@@ -156,7 +156,9 @@ function renderUserInputAll(event) {
   var firstLineContent = ` Thank you ${
     event.target.username.value
   } for creating an account.`;
-  var secondLineContent = `Your Email is: ${event.target.email.value}`;
+  var secondLineContent = `The Email you have provided is: ${
+    event.target.email.value
+  }`;
 
   renderUserInputEach(firstLineContent);
   renderUserInputEach(secondLineContent);
@@ -165,8 +167,12 @@ function renderUserInputAll(event) {
 function validateUserName(event) {
   var username = event.target.username.value;
 
-  if (!username.match(/^[a-zA-Z]+$/)) {
-    alert("Only letters are allowed for User Name.");
+  if (!username.match(/^[\w\W\d]+$/)) {
+    alert("User Name field is empty");
+    return false;
+  }
+  if (username.length < 10) {
+    alert("User Name must be minimum 10 characters/digits");
     return false;
   }
 
