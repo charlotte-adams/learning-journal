@@ -21,16 +21,19 @@ BlogPost.prototype.render = function(parent) {
 
   parent.appendChild(singlePostDiv);
 };
-
+// charlotte right here today-tuesday
+// make title clickable
 BlogPost.prototype.renderTitle = function(parent) {
   const anchorTitle = document.createElement("a");
   anchorTitle.href = "#";
-  anchorTitle.dataset.path = this.id;
   const title = document.createElement("h2");
+  title.dataset.path = this.id;
   anchorTitle.className = "clickable-title";
   title.className = "post-title";
-  anchorTitle.textContent = title.textContent = this.title;
+  title.textContent = this.title;
+  anchorTitle.appendChild(title);
   parent.appendChild(anchorTitle);
+  anchorTitle.addEventListener("click", handleTitleClick);
 };
 
 BlogPost.prototype.renderAuthor = function(parent) {
@@ -110,6 +113,22 @@ function hideAll() {
     page.classList.add("hidden");
   });
 }
+
+function handleTitleClick(event) {
+  const path = event.target.dataset.path;
+  const currentPost = allPosts.find(function(post) {
+    return path == post.id;
+  });
+  const posts = document.querySelectorAll(".post-container");
+  posts.forEach(function(post) {
+    post.remove();
+  });
+  const allPostsContainer = document.getElementById("all-posts-container");
+  currentPost.render(allPostsContainer);
+
+  console.log(currentPost);
+}
+
 header.addEventListener("click", handleNav);
 
 createNewBlog();
