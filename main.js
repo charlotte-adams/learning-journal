@@ -23,10 +23,14 @@ BlogPost.prototype.render = function(parent) {
 };
 
 BlogPost.prototype.renderTitle = function(parent) {
+  const anchorTitle = document.createElement("a");
+  anchorTitle.href = "#";
+  anchorTitle.dataset.path = this.id;
   const title = document.createElement("h2");
+  anchorTitle.className = "clickable-title";
   title.className = "post-title";
-  title.textContent = this.title;
-  parent.appendChild(title);
+  anchorTitle.textContent = title.textContent = this.title;
+  parent.appendChild(anchorTitle);
 };
 
 BlogPost.prototype.renderAuthor = function(parent) {
