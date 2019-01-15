@@ -33,13 +33,14 @@
         </div>
       </div>
       <nav class="main-nav">
-        <a class="nav-link" href="#home-page">Home</a>
-        <a class="nav-link" href="#about-page">About</a>
-        <a class="nav-link" href="#contact-page">Contact</a>
+        <a class="nav-link" href="#" data-path="home">Home</a>
+        <a class="nav-link" href="#" data-path="all">All Posts</a>
+        <a class="nav-link" href="#" data-path="about">About</a>
+        <a class="nav-link" href="#" data-path="contact">Contact</a>
       </nav>
     </header>
-    <div class="all-posts-page">
-      <div id="all-posts-container">
+    <div class="page all-posts-page hidden" id="all">
+      <div id="all-posts-container" class="all-posts">
         <!-- <div class="post-container"> 
                         <h2 class="post-title"></h2> 
                         <span class="post-tags"></span>
@@ -50,26 +51,108 @@
                         <div id="post-body"></div>
                     </div>  -->
       </div>
+    </div>
+    <div class="page home-page" id="home">
+      <div class="home-page-container" id="home-page-wrap"></div>
       <div class="sidebar-container">
-        <h2 class="sidebar-quote">Sidebar Quote</h2>
-        <div class="sidebar-nav"></div>
-        <div>
-          <a
-            target="_blank"
-            class="nav-link"
-            href="https://github.com/charlottewarfel"
-            >gitHub</a
-          >
-        </div>
-        <div>
-          <a
-            target="_blank"
-            class="nav-link"
-            href="https://www.linkedin.com/in/charlotte-warfel-481120177/"
-            >LinkedIn</a
-          >
+        <div class="sidebar-content">
+          <div><h2 class="sidebar-quote">Sidebar Quote</h2></div>
+          <div class="sidebar-nav">
+            <div>
+              <a
+                target="_blank"
+                class="nav-link"
+                href="https://github.com/charlottewarfel"
+                >gitHub</a
+              >
+            </div>
+            <div>
+              <a
+                target="_blank"
+                class="nav-link"
+                href="https://www.linkedin.com/in/charlotte-warfel-481120177/"
+                >LinkedIn</a
+              >
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+    <!-- contact page form..................................................................... -->
+    <div class="page contact-page hidden" id="contact">
+      <h1 class="contact-page-title">Welcome</h1>
+      <h3 class="contact-page-subtitle">Would you like to submit a post?</h3>
+      <h3 class="contact-page-subtitle">
+        Create an account using the form below:
+      </h3>
+
+      <form name="userform" class="contact-userform">
+        <div class="contact-user-form-wrapper">
+          <div class="contact-wrapper">
+            <div class="contact-inner-container">
+              <label class="contact-label" for="name">User Name</label>
+              <input
+                class="contact-input"
+                type="text"
+                id="username"
+                value=""
+                name="username"
+              />
+            </div>
+          </div>
+
+          <div class="contact-wrapper">
+            <div class="contact-inner-container">
+              <label class="contact-label" for="email">EMail:</label>
+              <input
+                class="contact-input"
+                type="email"
+                id="email"
+                value=""
+                name="email"
+              />
+            </div>
+          </div>
+
+          <div class="contact-wrapper" id="paswd_confirmpaswd">
+            <div class="contact-inner-container">
+              <label class="contact-label" for="password">Password:</label>
+              <input
+                class="contact-input"
+                type="password"
+                id="password"
+                value=""
+                name="password"
+              />
+            </div>
+            <div class="contact-inner-container">
+              <label class="contact-label" for="confirm_password"
+                >Confirm Password:</label
+              >
+              <input
+                class="contact-input"
+                type="password"
+                id="confirm_password"
+                value=""
+                name="confirm_password"
+              />
+              <span id="message"></span>
+            </div>
+          </div>
+
+          <div class="contact-wrapper">
+            <div class="contact-submit-button">
+              <input class="contact-input" type="submit" />
+            </div>
+          </div>
+        </div>
+      </form>
+      <br />
+
+      <div id="contact-print-user-info"></div>
+    </div>
+    <div class="page about-page hidden" id="about">
+      This is the content for About Page
     </div>
     <script type="text/javascript" src="main.js"></script>
   </body>
