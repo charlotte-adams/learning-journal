@@ -87,13 +87,13 @@ body {
 }
 
 /* contact page form....................................................................... */
-h1 {
+.contact-page-title {
   text-align: center;
   margin: 0 auto;
   width: 400px;
 }
 
-h3 {
+.contact-page-subtitle {
   text-align: center;
 }
 
