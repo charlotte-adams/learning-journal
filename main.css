@@ -32,9 +32,6 @@ body {
   border-bottom: 1px solid black;
   padding-bottom: 5px;
 }
-.post-body {
-  max-width: 650x;
-}
 
 .sidebar-container {
   border: 3px solid lightseagreen;
@@ -72,9 +69,6 @@ body {
     display: flex;
   }
 
-  .post-body {
-    max-width: 650px;
-  }
   .post-title {
     text-align: center;
   }
