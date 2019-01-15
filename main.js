@@ -125,8 +125,6 @@ function handleTitleClick(event) {
   });
   const allPostsContainer = document.getElementById("all-posts-container");
   currentPost.render(allPostsContainer);
-
-  console.log(currentPost);
 }
 
 header.addEventListener("click", handleNav);
