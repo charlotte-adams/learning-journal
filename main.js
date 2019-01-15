@@ -146,7 +146,7 @@ var userform = document.querySelector("form");
 userform.addEventListener("submit", submitForm);
 
 function renderUserInputEach(value) {
-  var printParent = document.getElementById("print");
+  var printParent = document.getElementById("contact-print-user-info");
   var eachInputField = document.createElement("div");
   eachInputField.textContent = value;
   printParent.appendChild(eachInputField);

@@ -86,30 +86,51 @@
         Create an account using the form below:
       </h3>
 
-      <form name="userform">
-        <div class="user-form-wrapper">
-          <div class="wrapper">
-            <div class="inner_container">
-              <label for="name">User Name</label>
-              <input type="text" id="username" value="" name="username" />
-            </div>
-          </div>
-
-          <div class="wrapper">
-            <div class="inner_container">
-              <label for="email">EMail:</label>
-              <input type="email" id="email" value="" name="email" />
-            </div>
-          </div>
-
-          <div class="wrapper" id="paswd_confirmpaswd">
-            <div class="inner_container">
-              <label for="password">Password:</label>
-              <input type="password" id="password" value="" name="password" />
-            </div>
-            <div class="inner_container">
-              <label for="confirm_password">Confirm Password:</label>
+      <form name="userform" class="contact-userform">
+        <div class="contact-user-form-wrapper">
+          <div class="contact-wrapper">
+            <div class="contact-inner-container">
+              <label class="contact-label" for="name">User Name</label>
               <input
+                class="contact-input"
+                type="text"
+                id="username"
+                value=""
+                name="username"
+              />
+            </div>
+          </div>
+
+          <div class="contact-wrapper">
+            <div class="contact-inner-container">
+              <label class="contact-label" for="email">EMail:</label>
+              <input
+                class="contact-input"
+                type="email"
+                id="email"
+                value=""
+                name="email"
+              />
+            </div>
+          </div>
+
+          <div class="contact-wrapper" id="paswd_confirmpaswd">
+            <div class="contact-inner-container">
+              <label class="contact-label" for="password">Password:</label>
+              <input
+                class="contact-input"
+                type="password"
+                id="password"
+                value=""
+                name="password"
+              />
+            </div>
+            <div class="contact-inner-container">
+              <label class="contact-label" for="confirm_password"
+                >Confirm Password:</label
+              >
+              <input
+                class="contact-input"
                 type="password"
                 id="confirm_password"
                 value=""
@@ -119,14 +140,16 @@
             </div>
           </div>
 
-          <div class="wrapper">
-            <div class="button"><input type="submit" /></div>
+          <div class="contact-wrapper">
+            <div class="contact-submit-button">
+              <input class="contact-input" type="submit" />
+            </div>
           </div>
         </div>
       </form>
       <br />
 
-      <div id="print"></div>
+      <div id="contact-print-user-info"></div>
     </div>
     <div class="page about-page hidden" id="about">
       This is the content for About Page
