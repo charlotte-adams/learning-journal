@@ -1,4 +1,5 @@
 const allPosts = [];
+const allPostsContainer = document.getElementById("all-posts-container");
 
 function BlogPost(id, title, author, createdOn, body, tags) {
   this.id = id;
@@ -39,13 +40,13 @@ BlogPost.prototype.renderAuthor = function(parent) {
   const anchorAuthor = document.createElement("a");
   anchorAuthor.href = "#";
   const author = document.createElement("div");
-  author.dataset.path = this.id;
+  author.dataset.path = this.author;
   anchorAuthor.className = "clickable-author";
   author.className = "post-author";
   author.textContent = `${this.author}`;
   anchorAuthor.appendChild(author);
   parent.appendChild(anchorAuthor);
-  // anchorAuthor.addEventListener("click", handleAuthorCick);
+  anchorAuthor.addEventListener("click", handleAuthorCick);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
@@ -103,7 +104,6 @@ function createNewBlog() {
 
 function renderAllPosts() {
   allPosts.forEach(function(post) {
-    const allPostsContainer = document.getElementById("all-posts-container");
     post.render(allPostsContainer, true);
   });
 }
@@ -135,7 +135,6 @@ function handleTitleClick(event) {
   });
   removePosts();
 
-  const allPostsContainer = document.getElementById("all-posts-container");
   currentPost.render(allPostsContainer, false);
 
   const link = document.getElementById("back");
@@ -147,6 +146,20 @@ function removePosts() {
   posts.forEach(function(post) {
     post.remove();
   });
+}
+
+function handleAuthorCick(event) {
+  const path = event.target.dataset.path;
+  const postsByAuthor = allPosts.filter(function(post) {
+    return path == post.author;
+  });
+  removePosts();
+
+  postsByAuthor.forEach(function(post) {
+    post.render(allPostsContainer, true);
+  });
+
+  console.log(postsByAuthor);
 }
 
 function handleBackToAllPosts(event) {
