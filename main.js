@@ -143,7 +143,7 @@ function handleTitleClick(event) {
   link.addEventListener("click", handleBackToAllPosts);
 }
 function removePosts() {
-  const posts = document.querySelectorAll(".post-container");
+  const posts = document.querySelectorAll(".all-posts-page .post-container");
   posts.forEach(function(post) {
     post.remove();
   });
