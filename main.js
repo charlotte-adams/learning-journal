@@ -36,10 +36,16 @@ BlogPost.prototype.renderTitle = function(parent) {
 };
 
 BlogPost.prototype.renderAuthor = function(parent) {
+  const anchorAuthor = document.createElement("a");
+  anchorAuthor.href = "#";
   const author = document.createElement("div");
+  author.dataset.path = this.id;
+  anchorAuthor.className = "clickable-author";
   author.className = "post-author";
-  author.textContent = `By: ${this.author}`;
-  parent.appendChild(author);
+  author.textContent = `${this.author}`;
+  anchorAuthor.appendChild(author);
+  parent.appendChild(anchorAuthor);
+  // anchorAuthor.addEventListener("click", handleAuthorCick);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
