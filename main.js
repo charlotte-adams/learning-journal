@@ -9,14 +9,14 @@ function BlogPost(id, title, author, createdOn, body, tags) {
   this.tags = tags;
 }
 
-BlogPost.prototype.render = function(parent) {
+BlogPost.prototype.render = function(parent, summary) {
   const singlePostDiv = document.createElement("div");
   singlePostDiv.className = "post-container";
 
   this.renderTitle(singlePostDiv);
   this.renderAuthor(singlePostDiv);
   this.renderCreatedOn(singlePostDiv);
-  this.renderBody(singlePostDiv);
+  this.renderBody(singlePostDiv, summary);
   this.renderTags(singlePostDiv);
 
   parent.appendChild(singlePostDiv);
@@ -57,13 +57,22 @@ BlogPost.prototype.renderCreatedOn = function(parent) {
   parent.appendChild(createdOn);
 };
 
-BlogPost.prototype.renderBody = function(parent) {
+BlogPost.prototype.renderBody = function(parent, summary) {
   const body = document.createElement("div");
+  const bodyToRender = summary === true ? this.summmaryBody() : this.body;
   body.className = "post-body";
   const md = window.markdownit();
-  const result = md.render(this.body);
+  const result = md.render(bodyToRender);
   body.innerHTML = result;
   parent.appendChild(body);
+};
+
+BlogPost.prototype.summmaryBody = function() {
+  return this.body
+    .split(" ")
+    .slice(0, 51)
+    .join(" ")
+    .concat("...");
 };
 
 function renderDate(date) {
@@ -89,13 +98,13 @@ function createNewBlog() {
 function renderAllPosts() {
   allPosts.forEach(function(post) {
     const allPostsContainer = document.getElementById("all-posts-container");
-    post.render(allPostsContainer);
+    post.render(allPostsContainer, true);
   });
 }
 function renderSinglePost() {
   const post = allPosts[0];
   const homePageWrap = document.getElementById("home-page-wrap");
-  post.render(homePageWrap);
+  post.render(homePageWrap, false);
 }
 
 const header = document.querySelector("header");
@@ -121,7 +130,7 @@ function handleTitleClick(event) {
   removePosts();
 
   const allPostsContainer = document.getElementById("all-posts-container");
-  currentPost.render(allPostsContainer);
+  currentPost.render(allPostsContainer, false);
 
   const link = document.getElementById("back");
   link.classList.remove("hidden");
