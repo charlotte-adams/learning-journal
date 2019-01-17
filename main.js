@@ -16,6 +16,7 @@ BlogPost.prototype.render = function(parent, summary) {
 
   this.renderTitle(singlePostDiv);
   this.renderAuthor(singlePostDiv);
+  // this.showUserAuthorsName(singlePostDiv);
   this.renderCreatedOn(singlePostDiv);
   this.renderBody(singlePostDiv, summary);
   this.renderTags(singlePostDiv);
@@ -46,7 +47,16 @@ BlogPost.prototype.renderAuthor = function(parent) {
   author.textContent = `${this.author}`;
   anchorAuthor.appendChild(author);
   parent.appendChild(anchorAuthor);
-  anchorAuthor.addEventListener("click", handleAuthorCick);
+  anchorAuthor.addEventListener("click", getAuthorClickHandlerForPost(this));
+};
+
+BlogPost.prototype.showUserAuthorsName = function(parent) {
+  const showAuthorName = document.createElement("div");
+  showAuthorName.dataset.path = this.author;
+  showAuthorName.id = "show-now hidden";
+  showAuthorName.className = "show-author-name";
+  showAuthorName.textContent = `Showing all posts by: ${this.author}`;
+  parent.appendChild(showAuthorName);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
@@ -141,25 +151,41 @@ function handleTitleClick(event) {
   link.classList.remove("hidden");
   link.addEventListener("click", handleBackToAllPosts);
 }
+
 function removePosts() {
   const posts = document.querySelectorAll(".all-posts-page .post-container");
   posts.forEach(function(post) {
     post.remove();
   });
 }
+// charlotte you're right here...Blog prototype?
+// to access this.author,
+// function showUserAuthorsName() {
+//   const allPostsByAuthor = document.createElement("span");
+//   allPostsByAuthor.className = "all-posts-by_author";
+//   allPostsByAuthor.textContent = `Showing all posts by: ${this.author}`;
+//   allPostsContainer.appendChild(allPostsByAuthor);
+// }
 
-function handleAuthorCick(event) {
-  const path = event.target.dataset.path;
-  const postsByAuthor = allPosts.filter(function(post) {
-    return path == post.author;
-  });
-  removePosts();
+function getAuthorClickHandlerForPost(post) {
+  return function handleAuthorCick(event) {
+    const path = event.target.dataset.path;
+    const postsByAuthor = allPosts.filter(function(post) {
+      return path == post.author;
+    });
+    removePosts();
 
-  postsByAuthor.forEach(function(post) {
-    post.render(allPostsContainer, true);
-  });
+    postsByAuthor.forEach(function(post) {
+      post.render(allPostsContainer, true);
+    });
+    const authorDiv = document.getElementById("authorName");
+    authorDiv.classList.remove("hidden");
+    post.showUserAuthorsName(authorDiv);
 
-  console.log(postsByAuthor);
+    const link = document.getElementById("back");
+    link.classList.remove("hidden");
+    link.addEventListener("click", handleBackToAllPosts);
+  };
 }
 
 function handleBackToAllPosts(event) {
