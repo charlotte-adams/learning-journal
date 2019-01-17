@@ -53,7 +53,7 @@ BlogPost.prototype.renderAuthor = function(parent) {
 BlogPost.prototype.showUserAuthorsName = function(parent) {
   const showAuthorName = document.createElement("div");
   showAuthorName.dataset.path = this.author;
-  showAuthorName.id = "show-now hidden";
+  showAuthorName.id = "show-now";
   showAuthorName.className = "show-author-name";
   showAuthorName.textContent = `Showing all posts by: ${this.author}`;
   parent.appendChild(showAuthorName);
@@ -167,6 +167,19 @@ function removePosts() {
 //   allPostsContainer.appendChild(allPostsByAuthor);
 // }
 
+// getAuthorClickHandlerForPost(this)
+
+function addToFirstNumber(firstNumber) {
+  return function add(secondNumber) {
+    return firstNumber + secondNumber;
+  };
+}
+
+addToFirstNumber(3);
+function add(secondNumber) {
+  return 3 + secondNumber;
+}
+
 function getAuthorClickHandlerForPost(post) {
   return function handleAuthorCick(event) {
     const path = event.target.dataset.path;
@@ -193,6 +206,13 @@ function handleBackToAllPosts(event) {
   removePosts();
   renderAllPosts();
   link.classList.add("hidden");
+
+  removeAuthName();
+}
+
+function removeAuthName() {
+  const authNameRemoved = document.getElementById("show-now");
+  authNameRemoved.remove();
 }
 
 header.addEventListener("click", handleNav);
