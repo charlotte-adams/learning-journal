@@ -16,7 +16,6 @@ BlogPost.prototype.render = function(parent, summary) {
 
   this.renderTitle(singlePostDiv);
   this.renderAuthor(singlePostDiv);
-  // this.showUserAuthorsName(singlePostDiv);
   this.renderCreatedOn(singlePostDiv);
   this.renderBody(singlePostDiv, summary);
   this.renderTags(singlePostDiv);
@@ -157,27 +156,6 @@ function removePosts() {
   posts.forEach(function(post) {
     post.remove();
   });
-}
-// charlotte you're right here...Blog prototype?
-// to access this.author,
-// function showUserAuthorsName() {
-//   const allPostsByAuthor = document.createElement("span");
-//   allPostsByAuthor.className = "all-posts-by_author";
-//   allPostsByAuthor.textContent = `Showing all posts by: ${this.author}`;
-//   allPostsContainer.appendChild(allPostsByAuthor);
-// }
-
-// getAuthorClickHandlerForPost(this)
-
-function addToFirstNumber(firstNumber) {
-  return function add(secondNumber) {
-    return firstNumber + secondNumber;
-  };
-}
-
-addToFirstNumber(3);
-function add(secondNumber) {
-  return 3 + secondNumber;
 }
 
 function getAuthorClickHandlerForPost(post) {
