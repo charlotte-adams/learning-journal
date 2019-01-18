@@ -27,7 +27,7 @@ BlogPost.prototype.renderTitle = function(parent) {
   const anchorTitle = document.createElement("a");
   anchorTitle.href = "#";
   const title = document.createElement("h2");
-  title.dataset.path = this.id;
+  title.dataset.title = this.id;
   anchorTitle.className = "clickable-title";
   title.className = "post-title";
   title.textContent = this.title;
@@ -40,7 +40,7 @@ BlogPost.prototype.renderAuthor = function(parent) {
   const anchorAuthor = document.createElement("a");
   anchorAuthor.href = "#";
   const author = document.createElement("div");
-  author.dataset.path = this.author;
+  author.dataset.author = this.author;
   anchorAuthor.className = "clickable-author";
   author.className = "post-author";
   author.textContent = `${this.author}`;
@@ -51,7 +51,7 @@ BlogPost.prototype.renderAuthor = function(parent) {
 
 BlogPost.prototype.showUserAuthorsName = function(parent) {
   const showAuthorName = document.createElement("div");
-  showAuthorName.dataset.path = this.author;
+  showAuthorName.dataset.author = this.author;
   showAuthorName.id = "show-now";
   showAuthorName.className = "show-author-name";
   showAuthorName.textContent = `Showing all posts by: ${this.author}`;
@@ -138,9 +138,9 @@ function hideAll() {
 }
 
 function handleTitleClick(event) {
-  const path = event.target.dataset.path;
+  const title = event.target.dataset.title;
   const currentPost = allPosts.find(function(post) {
-    return path == post.id;
+    return title === post.id;
   });
   removePosts();
 
@@ -160,9 +160,9 @@ function removePosts() {
 
 function getAuthorClickHandlerForPost(post) {
   return function handleAuthorCick(event) {
-    const path = event.target.dataset.path;
+    const author = event.target.dataset.author;
     const postsByAuthor = allPosts.filter(function(post) {
-      return path == post.author;
+      return author === post.author;
     });
     removePosts();
 
@@ -291,7 +291,7 @@ function validatePassword(event) {
     alert("Confirm Password must be minimum 8 characters.");
     return false;
   }
-  if (verifyPswd == confirmPswd) {
+  if (verifyPswd === confirmPswd) {
     return true;
   } else {
     alert("Please verify Password and Confirm Password match");
