@@ -27,7 +27,7 @@ BlogPost.prototype.renderTitle = function(parent) {
   const anchorTitle = document.createElement("a");
   anchorTitle.href = "#";
   const title = document.createElement("h2");
-  title.dataset.title = this.id;
+  title.dataset.id = this.id;
   anchorTitle.className = "clickable-title";
   title.className = "post-title";
   title.textContent = this.title;
@@ -138,9 +138,9 @@ function hideAll() {
 }
 
 function handleTitleClick(event) {
-  const title = event.target.dataset.title;
+  const id = event.target.dataset.id;
   const currentPost = allPosts.find(function(post) {
-    return title === post.id;
+    return id === post.id;
   });
   removePosts();
 
