@@ -57,7 +57,6 @@ BlogPost.prototype.showUserAuthorsName = function(parent) {
   showAuthorName.textContent = `Showing all posts by: ${this.author}`;
   parent.appendChild(showAuthorName);
 };
-// This is you today, charlotte.
 
 BlogPost.prototype.renderTags = function(parent) {
   const container = document.createElement("div");
@@ -72,25 +71,17 @@ BlogPost.prototype.renderTags = function(parent) {
     const spanTag = document.createElement("span");
     const anchorTag = document.createElement("a");
     anchorTag.href = "#";
-    spanTag.dataset.tag = tag;
+    anchorTag.dataset.tag = tag;
     anchorTag.className = "clickable-tag";
     spanTag.className = "post-tag";
     anchorTag.textContent = tag;
     spanTag.appendChild(anchorTag);
     container.appendChild(spanTag);
+    anchorTag.addEventListener("click", handleTagClick);
   });
 
   parent.appendChild(container);
-
-  // anchorTags.addEventListener("click", handleTagClick());
 };
-
-// function renderEachTag() {
-//   var tags = [];
-//   tags.forEach(function(tag) {
-//     tag.render();
-//   });
-// }
 
 BlogPost.prototype.renderCreatedOn = function(parent) {
   const createdOn = document.createElement("span");
@@ -185,9 +176,17 @@ function removePosts() {
   });
 }
 
-// function handleTagClick(event) {
+function handleTagClick(event) {
+  const tag = event.target.dataset.tag;
+  const matchingPosts = allPosts.filter(function(post) {
+    return post.tags.includes(tag);
+  });
+  removePosts();
 
-// }
+  matchingPosts.forEach(function(post) {
+    post.render(allPostsContainer, true);
+  });
+}
 
 function getAuthorClickHandlerForPost(post) {
   return function handleAuthorCick(event) {
@@ -209,8 +208,6 @@ function getAuthorClickHandlerForPost(post) {
     link.addEventListener("click", handleBackToAllPosts);
   };
 }
-
-function handleTagsClick(event) {}
 
 function handleBackToAllPosts() {
   const link = document.getElementById("back");
