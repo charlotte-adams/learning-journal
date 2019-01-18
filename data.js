@@ -28,7 +28,7 @@ var data = [
   {
     id: 2,
     title: "Three and three and three and three and three three",
-    author: "Charlotte",
+    author: "Charlotte Mickey Mouse",
     createdOn: "2018-12-29",
     body: `Isn't that fantastic? You can just push a little tree out of your brush like that. Sometimes you learn more from your mistakes than you do from your masterpieces. I get carried away with this brush cleaning. Son of a gun. We spend so much of our life looking - but never seeing.
       You need the dark in order to show the light. Nice little fluffy clouds laying around in the sky being lazy. Only think about one thing at a time. Don't get greedy.

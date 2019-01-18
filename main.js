@@ -1,4 +1,5 @@
 const allPosts = [];
+const allPostsContainer = document.getElementById("all-posts-container");
 
 function BlogPost(id, title, author, createdOn, body, tags) {
   this.id = id;
@@ -26,7 +27,7 @@ BlogPost.prototype.renderTitle = function(parent) {
   const anchorTitle = document.createElement("a");
   anchorTitle.href = "#";
   const title = document.createElement("h2");
-  title.dataset.path = this.id;
+  title.dataset.id = this.id;
   anchorTitle.className = "clickable-title";
   title.className = "post-title";
   title.textContent = this.title;
@@ -36,10 +37,25 @@ BlogPost.prototype.renderTitle = function(parent) {
 };
 
 BlogPost.prototype.renderAuthor = function(parent) {
+  const anchorAuthor = document.createElement("a");
+  anchorAuthor.href = "#";
   const author = document.createElement("div");
+  author.dataset.author = this.author;
+  anchorAuthor.className = "clickable-author";
   author.className = "post-author";
-  author.textContent = `By: ${this.author}`;
-  parent.appendChild(author);
+  author.textContent = `${this.author}`;
+  anchorAuthor.appendChild(author);
+  parent.appendChild(anchorAuthor);
+  anchorAuthor.addEventListener("click", getAuthorClickHandlerForPost(this));
+};
+
+BlogPost.prototype.showUserAuthorsName = function(parent) {
+  const showAuthorName = document.createElement("div");
+  showAuthorName.dataset.author = this.author;
+  showAuthorName.id = "show-now";
+  showAuthorName.className = "show-author-name";
+  showAuthorName.textContent = `Showing all posts by: ${this.author}`;
+  parent.appendChild(showAuthorName);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
@@ -97,7 +113,6 @@ function createNewBlog() {
 
 function renderAllPosts() {
   allPosts.forEach(function(post) {
-    const allPostsContainer = document.getElementById("all-posts-container");
     post.render(allPostsContainer, true);
   });
 }
@@ -123,19 +138,19 @@ function hideAll() {
 }
 
 function handleTitleClick(event) {
-  const path = event.target.dataset.path;
+  const id = event.target.dataset.id;
   const currentPost = allPosts.find(function(post) {
-    return path == post.id;
+    return id === post.id;
   });
   removePosts();
 
-  const allPostsContainer = document.getElementById("all-posts-container");
   currentPost.render(allPostsContainer, false);
 
   const link = document.getElementById("back");
   link.classList.remove("hidden");
   link.addEventListener("click", handleBackToAllPosts);
 }
+
 function removePosts() {
   const posts = document.querySelectorAll(".all-posts-page .post-container");
   posts.forEach(function(post) {
@@ -143,11 +158,39 @@ function removePosts() {
   });
 }
 
-function handleBackToAllPosts(event) {
+function getAuthorClickHandlerForPost(post) {
+  return function handleAuthorCick(event) {
+    const author = event.target.dataset.author;
+    const postsByAuthor = allPosts.filter(function(post) {
+      return author === post.author;
+    });
+    removePosts();
+
+    postsByAuthor.forEach(function(post) {
+      post.render(allPostsContainer, true);
+    });
+    const authorDiv = document.getElementById("authorName");
+    authorDiv.classList.remove("hidden");
+    post.showUserAuthorsName(authorDiv);
+
+    const link = document.getElementById("back");
+    link.classList.remove("hidden");
+    link.addEventListener("click", handleBackToAllPosts);
+  };
+}
+
+function handleBackToAllPosts() {
   const link = document.getElementById("back");
   removePosts();
   renderAllPosts();
   link.classList.add("hidden");
+
+  removeAuthName();
+}
+
+function removeAuthName() {
+  const authNameRemoved = document.getElementById("show-now");
+  authNameRemoved.remove();
 }
 
 header.addEventListener("click", handleNav);
@@ -248,7 +291,7 @@ function validatePassword(event) {
     alert("Confirm Password must be minimum 8 characters.");
     return false;
   }
-  if (verifyPswd == confirmPswd) {
+  if (verifyPswd === confirmPswd) {
     return true;
   } else {
     alert("Please verify Password and Confirm Password match");
