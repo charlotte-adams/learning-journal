@@ -179,7 +179,7 @@ function getAuthorClickHandlerForPost(post) {
   };
 }
 
-function handleBackToAllPosts(event) {
+function handleBackToAllPosts() {
   const link = document.getElementById("back");
   removePosts();
   renderAllPosts();
