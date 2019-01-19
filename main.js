@@ -58,16 +58,28 @@ BlogPost.prototype.showUserAuthorsName = function(parent) {
   parent.appendChild(showAuthorName);
 };
 
+// right here charlotte friday night.
+
+BlogPost.prototype.showUserTagFilter = function(parent, tag) {
+  const showUserTagName = document.createElement("div");
+  showUserTagName.dataset.tag = this.tags;
+  showUserTagName.id = "tag-name";
+  showUserTagName.className = "show-tag-name";
+  showUserTagName.textContent = `Showing all posts filtered by: ${tag}`;
+  parent.appendChild(showUserTagName);
+};
+
 BlogPost.prototype.renderTags = function(parent) {
   const container = document.createElement("div");
   container.className = "tags-container";
+  container.id = "allTagsContainer";
 
   const keyWords = document.createElement("span");
   keyWords.className = "key-words";
   keyWords.textContent = "Key Words: ";
   container.appendChild(keyWords);
 
-  this.tags.forEach(function(tag) {
+  this.tags.forEach(tag => {
     const spanTag = document.createElement("span");
     const anchorTag = document.createElement("a");
     anchorTag.href = "#";
@@ -77,7 +89,8 @@ BlogPost.prototype.renderTags = function(parent) {
     anchorTag.textContent = tag;
     spanTag.appendChild(anchorTag);
     container.appendChild(spanTag);
-    anchorTag.addEventListener("click", handleTagClick);
+    console.log(this);
+    anchorTag.addEventListener("click", getTagClickHandlerForPost(this));
   });
 
   parent.appendChild(container);
@@ -176,16 +189,27 @@ function removePosts() {
   });
 }
 
-function handleTagClick(event) {
-  const tag = event.target.dataset.tag;
-  const matchingPosts = allPosts.filter(function(post) {
-    return post.tags.includes(tag);
-  });
-  removePosts();
+// right here charlotte-friday-need back to all post button to show
+// at same time as tag div and remove
+// tag div with user message at back to all post event
 
-  matchingPosts.forEach(function(post) {
-    post.render(allPostsContainer, true);
-  });
+function getTagClickHandlerForPost(post) {
+  return function handleTagClick(event) {
+    const tag = event.target.dataset.tag;
+    console.log("tag", tag);
+    const matchingPosts = allPosts.filter(function(post) {
+      return post.tags.includes(tag);
+    });
+    removePosts();
+
+    matchingPosts.forEach(function(post) {
+      post.render(allPostsContainer, true);
+    });
+
+    const tagDiv = document.getElementById("tagName");
+    tagDiv.classList.remove("hidden");
+    post.showUserTagFilter(tagDiv, tag);
+  };
 }
 
 function getAuthorClickHandlerForPost(post) {
@@ -228,8 +252,6 @@ header.addEventListener("click", handleNav);
 createNewBlog();
 renderAllPosts();
 renderSinglePost();
-// renderAllTags();
-// renderSingleTag();
 
 // contact page form
 
