@@ -19,8 +19,8 @@ class userRepository {
       [username, email, password]
     );
   }
-  update(users) {
-    const { id, username, email, password } = user;
+  update(username) {
+    const { id, username, email, password } = username;
     return this.dao.run(
       `UPDATE users SET username = ?,
       email = ?,
@@ -31,5 +31,11 @@ class userRepository {
   }
   delete(id) {
     return this.dao.run(`DELETE FROM users WHERE id = ?`, [id]);
+  }
+  getById(id) {
+    return this.dao.get(`SELECT * FROM users WHERE id = ?`, [id]);
+  }
+  getAll() {
+    return this.dao.all(`SELECT * FROM username`);
   }
 }

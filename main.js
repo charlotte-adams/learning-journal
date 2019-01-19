@@ -1,4 +1,8 @@
 const allPosts = [];
+// const Promise = require("bluebird");
+// const AppDAO = require("./dao");
+// const UserRepository = require("./UserRepository");
+// const blogEntryRepository = require("./blogEntryRepository");
 
 function BlogPost(id, title, author, createdOn, body, tags) {
   this.id = id;
@@ -314,3 +318,71 @@ function validatePassword(event) {
     return false;
   }
 }
+
+// function main() {
+//   const dao = new AppDAO('./database.sqlite3')
+//   const blogProjectData =  { name: 'Learning Journal Sqlite Tutorial'}
+//   const userRepo = new UserRepository(dao)
+//   const blogEntryRepo = new blogEntryRepository(dao)
+//   let userId
+
+//   userRepo.createTable()
+//   .then(() => blogEntryRepo.createTable())
+//   .then (() => userRepo.createTable(blogProjectData.name))
+//   .then ((data) => {
+//     userId = data.id
+//     const blogEntries = [
+//       {
+//         title: 'testBlog1',
+//         body: 'this is a test blog entry body',
+//         author: 'test author',
+//         date: '01/19/2019',
+//         tags: 'red'
+//       },
+//       {
+//         title: 'testBlog2',
+//         body: 'this is a test blog 2 entry body',
+//         author: 'test author 2',
+//         date: '01/19/2019-2',
+//         tags: 'red-2'
+//       }
+//     ]
+//     return Promise.all(blogEntries.map((blogEntry) => {
+//       const { title, body, author, date, tags }
+//       return blogEntryRepo.create(title, body, author, date, tags) }
+//     ))
+
+//   })
+//   .then(() => userRepo.getById(author)
+//   .then ((userId) => {
+//     console.log (`\nRetrieved user from database`)
+//     console.log(`user id = ${userId.id}`)
+//     console.log(`user name = ${userId.username}`)
+//     return userRepo.getBlogEntries(user.id)
+//   })
+//   .then((blogEntries) => {
+//     console.log('\nRetrieved blog entries from database')
+//     return new Promise ((resolve, reject) => {
+//       blogEntries.forEach((blogEntry) => {
+//         console.log('blog id = ${blog.id}')
+//         console.log('blog title = ${blog.title}')
+//         console.log('blog body = ${blog.body}')
+//         console.log('blog author = ${blog.author}')
+//         console.log('blog date = ${blog.date}')
+//         console.log('blog tags = ${blog.tags}')
+
+//       })
+//     })
+
+//     resolve('success')
+
+//   })
+
+//   .catch((err) => {
+//     console.log('Error: ')
+//     console.log(JSON.stringify(err))
+//   })
+
+// }
+
+// main()

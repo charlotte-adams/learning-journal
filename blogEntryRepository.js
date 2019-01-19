@@ -39,4 +39,10 @@ class blogEntryRepository {
   delete(id) {
     return this.dao.run(`DELETE FROM blogEntry WHERE id = ? `, [id]);
   }
+  getById(id) {
+    return this.dao.get(`SELECT * FROM blogEntry WHERE id = ?`, [id]);
+  }
+  getBlogEntries(userId) {
+    return this.dao.all(`SELECT  * FROM blogEntry WHERE userId = ?`, [id]);
+  }
 }
