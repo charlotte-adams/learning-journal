@@ -58,8 +58,6 @@ BlogPost.prototype.showUserAuthorsName = function(parent) {
   parent.appendChild(showAuthorName);
 };
 
-// right here charlotte friday night.
-
 BlogPost.prototype.showUserTagFilter = function(parent, tag) {
   const showUserTagName = document.createElement("div");
   showUserTagName.dataset.tag = this.tags;
@@ -89,7 +87,6 @@ BlogPost.prototype.renderTags = function(parent) {
     anchorTag.textContent = tag;
     spanTag.appendChild(anchorTag);
     container.appendChild(spanTag);
-    console.log(this);
     anchorTag.addEventListener("click", getTagClickHandlerForPost(this));
   });
 
@@ -189,14 +186,9 @@ function removePosts() {
   });
 }
 
-// right here charlotte-friday-need back to all post button to show
-// at same time as tag div and remove
-// tag div with user message at back to all post event
-
 function getTagClickHandlerForPost(post) {
   return function handleTagClick(event) {
     const tag = event.target.dataset.tag;
-    console.log("tag", tag);
     const matchingPosts = allPosts.filter(function(post) {
       return post.tags.includes(tag);
     });
