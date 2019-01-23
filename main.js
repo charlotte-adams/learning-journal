@@ -201,6 +201,10 @@ function getTagClickHandlerForPost(post) {
     const tagDiv = document.getElementById("tagName");
     tagDiv.classList.remove("hidden");
     post.showUserTagFilter(tagDiv, tag);
+
+    const link = document.getElementById("back");
+    link.classList.remove("hidden");
+    link.addEventListener("click", handleBackToAllPosts);
   };
 }
 
