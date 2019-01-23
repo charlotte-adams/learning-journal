@@ -235,12 +235,18 @@ function handleBackToAllPosts() {
   renderAllPosts();
   link.classList.add("hidden");
 
+  removeShowUserTagFilter();
   removeAuthName();
 }
 
 function removeAuthName() {
   const authNameRemoved = document.getElementById("show-now");
   authNameRemoved.remove();
+}
+
+function removeShowUserTagFilter() {
+  const showUserTagFilterRemoved = document.getElementById("tagName");
+  showUserTagFilterRemoved.remove();
 }
 
 header.addEventListener("click", handleNav);
