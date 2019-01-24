@@ -60,20 +60,13 @@ BlogPost.prototype.showUserAuthorsName = function(parent) {
 
 BlogPost.prototype.showUserTagFilter = function(parent, tag) {
   const showUserTagName = document.createElement("div");
-  showUserTagName.dataset.tag = this.tags;
-  showUserTagName.id = "tag-name";
-  showUserTagName.className = "show-tag-name";
   showUserTagName.textContent = `Showing all posts filtered by: ${tag}`;
   parent.appendChild(showUserTagName);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
   const container = document.createElement("div");
-  container.className = "tags-container";
-  container.id = "allTagsContainer";
-
   const keyWords = document.createElement("span");
-  keyWords.className = "key-words";
   keyWords.textContent = "Key Words: ";
   container.appendChild(keyWords);
 
@@ -83,7 +76,6 @@ BlogPost.prototype.renderTags = function(parent) {
     anchorTag.href = "#";
     anchorTag.dataset.tag = tag;
     anchorTag.className = "clickable-tag";
-    spanTag.className = "post-tag";
     anchorTag.textContent = tag;
     spanTag.appendChild(anchorTag);
     container.appendChild(spanTag);
@@ -166,18 +158,18 @@ function hideAll() {
 }
 
 function handleTitleClick(event) {
-  const id = event.target.dataset.id;
+  const id = parseInt(event.target.dataset.id);
+
   const currentPost = allPosts.find(function(post) {
     return id === post.id;
   });
 
   removePosts();
+  currentPost.render(allPostsContainer, false);
 
   const link = document.getElementById("back");
   link.classList.remove("hidden");
   link.addEventListener("click", handleBackToAllPosts);
-
-  currentPost.render(allPostsContainer, false);
 }
 
 function removePosts() {
@@ -235,17 +227,17 @@ function handleBackToAllPosts() {
   removePosts();
   renderAllPosts();
   link.classList.add("hidden");
-  // console.log(link.classList);
+
   console.log(link);
 
   removeShowUserTagFilter();
-  // removeAuthName();
+  removeAuthName();
 }
 
-// function removeAuthName() {
-//   const authNameRemoved = document.getElementById("show-now");
-//   authNameRemoved.remove("hidden");
-// }
+function removeAuthName() {
+  const authNameRemoved = document.getElementById("show-now");
+  authNameRemoved.remove("hidden");
+}
 
 function removeShowUserTagFilter() {
   const showUserTagFilterRemoved = document.getElementById("tagName");
