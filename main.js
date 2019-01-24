@@ -170,13 +170,14 @@ function handleTitleClick(event) {
   const currentPost = allPosts.find(function(post) {
     return id === post.id;
   });
-  removePosts();
 
-  currentPost.render(allPostsContainer, false);
+  removePosts();
 
   const link = document.getElementById("back");
   link.classList.remove("hidden");
   link.addEventListener("click", handleBackToAllPosts);
+
+  currentPost.render(allPostsContainer, false);
 }
 
 function removePosts() {
@@ -234,19 +235,21 @@ function handleBackToAllPosts() {
   removePosts();
   renderAllPosts();
   link.classList.add("hidden");
+  // console.log(link.classList);
+  console.log(link);
 
   removeShowUserTagFilter();
-  removeAuthName();
+  // removeAuthName();
 }
 
-function removeAuthName() {
-  const authNameRemoved = document.getElementById("show-now");
-  authNameRemoved.remove();
-}
+// function removeAuthName() {
+//   const authNameRemoved = document.getElementById("show-now");
+//   authNameRemoved.remove("hidden");
+// }
 
 function removeShowUserTagFilter() {
   const showUserTagFilterRemoved = document.getElementById("tagName");
-  showUserTagFilterRemoved.remove();
+  showUserTagFilterRemoved.remove("hidden");
 }
 
 header.addEventListener("click", handleNav);
