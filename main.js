@@ -161,7 +161,7 @@ function handleTitleClick(event) {
 
   const link = document.getElementById("back");
   link.classList.remove("hidden");
-  link.addEventListener("click", handleBackToAllPosts);
+  link.addEventListener("click", handleBackToAllPostsFromFilter);
 }
 
 function removePosts() {
@@ -224,8 +224,6 @@ function removeFilter() {
     filterRemoved.remove();
   }
 }
-
-// [value] [comparison] [otherValue]
 
 function handleBackToAllPostsFromFilter() {
   const link = document.getElementById("back");
