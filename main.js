@@ -184,8 +184,8 @@ function getTagClickHandlerForPost(post) {
     });
 
     const tagDiv = document.getElementById("authAndTagDiv");
-
     const content = `Showing all posts filtered by: ${tag}`;
+    removeFilter();
     post.showUserFilter(tagDiv, content);
 
     const link = document.getElementById("back");
