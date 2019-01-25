@@ -200,14 +200,16 @@ function getAuthorClickHandlerForPost(post) {
     const postsByAuthor = allPosts.filter(function(post) {
       return author === post.author;
     });
+
     removePosts();
 
     postsByAuthor.forEach(function(post) {
       post.render(allPostsContainer, true);
     });
+
     const authorDiv = document.getElementById("authAndTagDiv");
     const content = `Showing all posts by: ${post.author}`;
-
+    removeFilter();
     post.showUserFilter(authorDiv, content);
 
     const link = document.getElementById("back");
@@ -217,9 +219,13 @@ function getAuthorClickHandlerForPost(post) {
 }
 
 function removeFilter() {
-  const authNameRemoved = document.getElementById("show-filter");
-  authNameRemoved.remove();
+  const filterRemoved = document.getElementById("show-filter");
+  if (filterRemoved !== null) {
+    filterRemoved.remove();
+  }
 }
+
+// [value] [comparison] [otherValue]
 
 function handleBackToAllPostsFromFilter() {
   const link = document.getElementById("back");
