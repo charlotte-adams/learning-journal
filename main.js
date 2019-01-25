@@ -49,19 +49,11 @@ BlogPost.prototype.renderAuthor = function(parent) {
   anchorAuthor.addEventListener("click", getAuthorClickHandlerForPost(this));
 };
 
-BlogPost.prototype.showUserAuthorsName = function(parent) {
-  const showAuthorName = document.createElement("div");
-  showAuthorName.dataset.author = this.author;
-  showAuthorName.id = "show-now";
-  showAuthorName.className = "show-author-name";
-  showAuthorName.textContent = `Showing all posts by: ${this.author}`;
-  parent.appendChild(showAuthorName);
-};
-
-BlogPost.prototype.showUserTagFilter = function(parent, tag) {
-  const showUserTagName = document.createElement("div");
-  showUserTagName.textContent = `Showing all posts filtered by: ${tag}`;
-  parent.appendChild(showUserTagName);
+BlogPost.prototype.showUserFilter = function(parent, content) {
+  const showFilterName = document.createElement("div");
+  showFilterName.textContent = content;
+  showFilterName.id = "show-filter";
+  parent.appendChild(showFilterName);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
@@ -191,13 +183,14 @@ function getTagClickHandlerForPost(post) {
       post.render(allPostsContainer, true);
     });
 
-    const tagDiv = document.getElementById("tagName");
-    tagDiv.classList.remove("hidden");
-    post.showUserTagFilter(tagDiv, tag);
+    const tagDiv = document.getElementById("authAndTagDiv");
+
+    const content = `Showing all posts filtered by: ${tag}`;
+    post.showUserFilter(tagDiv, content);
 
     const link = document.getElementById("back");
     link.classList.remove("hidden");
-    link.addEventListener("click", handleBackToAllPosts);
+    link.addEventListener("click", handleBackToAllPostsFromFilter);
   };
 }
 
@@ -212,36 +205,29 @@ function getAuthorClickHandlerForPost(post) {
     postsByAuthor.forEach(function(post) {
       post.render(allPostsContainer, true);
     });
-    const authorDiv = document.getElementById("authorName");
-    authorDiv.classList.remove("hidden");
-    post.showUserAuthorsName(authorDiv);
+    const authorDiv = document.getElementById("authAndTagDiv");
+    const content = `Showing all posts by: ${post.author}`;
+
+    post.showUserFilter(authorDiv, content);
 
     const link = document.getElementById("back");
     link.classList.remove("hidden");
-    link.addEventListener("click", handleBackToAllPosts);
+    link.addEventListener("click", handleBackToAllPostsFromFilter);
   };
 }
 
-function handleBackToAllPosts() {
+function removeFilter() {
+  const authNameRemoved = document.getElementById("show-filter");
+  authNameRemoved.remove();
+}
+
+function handleBackToAllPostsFromFilter() {
   const link = document.getElementById("back");
   removePosts();
   renderAllPosts();
   link.classList.add("hidden");
 
-  console.log(link);
-
-  removeShowUserTagFilter();
-  removeAuthName();
-}
-
-function removeAuthName() {
-  const authNameRemoved = document.getElementById("show-now");
-  authNameRemoved.remove("hidden");
-}
-
-function removeShowUserTagFilter() {
-  const showUserTagFilterRemoved = document.getElementById("tagName");
-  showUserTagFilterRemoved.remove("hidden");
+  removeFilter();
 }
 
 header.addEventListener("click", handleNav);
