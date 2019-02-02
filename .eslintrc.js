@@ -9,6 +9,7 @@ module.exports = {
 
   rules: {
     "no-console": 0,
-    indent: ["warning", 2],
+    indent: ["warn", 2],
+    eqeqeq: ["error", "always"],
   },
 };

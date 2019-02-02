@@ -32,9 +32,6 @@ body {
   border-bottom: 1px solid black;
   padding-bottom: 5px;
 }
-.post-body {
-  max-width: 650x;
-}
 
 .sidebar-container {
   border: 3px solid lightseagreen;
@@ -72,9 +69,6 @@ body {
     display: flex;
   }
 
-  .post-body {
-    max-width: 650px;
-  }
   .post-title {
     text-align: center;
   }
@@ -87,70 +81,56 @@ body {
 }
 
 /* contact page form....................................................................... */
-h1 {
+.contact-page-title {
   text-align: center;
   margin: 0 auto;
   width: 400px;
 }
 
-form {
+.contact-page-subtitle {
+  text-align: center;
+}
+
+.contact-userform {
   /* Just to center the form on the page */
   margin: 0 auto;
-  width: 500px;
+  width: 250px;
   /* To see the outline of the form */
   padding: 1em;
   border: 3px solid aqua;
   border-radius: 1em;
 }
 
-label {
+.contact-label {
   /* labels display on top of field. */
   display: block;
 }
 
-#print {
+#contact-print-user-info {
   /* this is the div where user input prints after submit */
   margin: auto;
-  width: 500px;
+  width: 250px;
   padding: 1em;
   border-radius: 1em;
   background-color: aquamarine;
 }
 
-.wrapper {
+.contact-wrapper {
   /* this is the outer div */
   margin-top: 1em;
+  margin-right: 2em;
 }
 
-.inner_container {
+.contact-inner-container {
   /* this holds the form field */
-
-  display: inline-block;
   margin: 1em;
 }
 
-.button {
-  text-align: center;
+.contact-submit-button {
+  margin-left: 15px;
 }
 
-#address {
-  width: 166px;
-}
-
-#city {
-  width: 80px;
-}
-
-#state {
-  width: 30px;
-}
-
-#zipcode {
-  width: 50px;
-}
-
-input,
-textarea {
+.contact-input {
   /* To make sure that all text fields have the same font settings
 By default, textareas have a monospace font */
   font: 1em sans-serif;
@@ -159,7 +139,7 @@ By default, textareas have a monospace font */
   border: 1px solid #999;
 }
 
-input:focus {
+.contact-input:focus {
   background-color: lightblue;
 }
 

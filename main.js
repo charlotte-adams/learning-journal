@@ -1,8 +1,12 @@
 const allPosts = [];
+<<<<<<< HEAD
 // const Promise = require("bluebird");
 // const AppDAO = require("./dao");
 // const UserRepository = require("./UserRepository");
 // const blogEntryRepository = require("./blogEntryRepository");
+=======
+const allPostsContainer = document.getElementById("all-posts-container");
+>>>>>>> 1a1baff70dd27b717cdcaa27df64e9f04fdb86c6
 
 function BlogPost(id, title, author, createdOn, body, tags) {
   this.id = id;
@@ -13,31 +17,52 @@ function BlogPost(id, title, author, createdOn, body, tags) {
   this.tags = tags;
 }
 
-BlogPost.prototype.render = function(parent) {
+BlogPost.prototype.render = function(parent, summary) {
   const singlePostDiv = document.createElement("div");
   singlePostDiv.className = "post-container";
 
   this.renderTitle(singlePostDiv);
   this.renderAuthor(singlePostDiv);
   this.renderCreatedOn(singlePostDiv);
-  this.renderBody(singlePostDiv);
+  this.renderBody(singlePostDiv, summary);
   this.renderTags(singlePostDiv);
 
   parent.appendChild(singlePostDiv);
 };
 
 BlogPost.prototype.renderTitle = function(parent) {
+  const anchorTitle = document.createElement("a");
+  anchorTitle.href = "#";
   const title = document.createElement("h2");
+  title.dataset.id = this.id;
+  anchorTitle.className = "clickable-title";
   title.className = "post-title";
   title.textContent = this.title;
-  parent.appendChild(title);
+  anchorTitle.appendChild(title);
+  parent.appendChild(anchorTitle);
+  anchorTitle.addEventListener("click", handleTitleClick);
 };
 
 BlogPost.prototype.renderAuthor = function(parent) {
+  const anchorAuthor = document.createElement("a");
+  anchorAuthor.href = "#";
   const author = document.createElement("div");
+  author.dataset.author = this.author;
+  anchorAuthor.className = "clickable-author";
   author.className = "post-author";
-  author.textContent = `By: ${this.author}`;
-  parent.appendChild(author);
+  author.textContent = `${this.author}`;
+  anchorAuthor.appendChild(author);
+  parent.appendChild(anchorAuthor);
+  anchorAuthor.addEventListener("click", getAuthorClickHandlerForPost(this));
+};
+
+BlogPost.prototype.showUserAuthorsName = function(parent) {
+  const showAuthorName = document.createElement("div");
+  showAuthorName.dataset.author = this.author;
+  showAuthorName.id = "show-now";
+  showAuthorName.className = "show-author-name";
+  showAuthorName.textContent = `Showing all posts by: ${this.author}`;
+  parent.appendChild(showAuthorName);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
@@ -55,13 +80,22 @@ BlogPost.prototype.renderCreatedOn = function(parent) {
   parent.appendChild(createdOn);
 };
 
-BlogPost.prototype.renderBody = function(parent) {
+BlogPost.prototype.renderBody = function(parent, summary) {
   const body = document.createElement("div");
+  const bodyToRender = summary === true ? this.summmaryBody() : this.body;
   body.className = "post-body";
   const md = window.markdownit();
-  const result = md.render(this.body);
+  const result = md.render(bodyToRender);
   body.innerHTML = result;
   parent.appendChild(body);
+};
+
+BlogPost.prototype.summmaryBody = function() {
+  return this.body
+    .split(" ")
+    .slice(0, 51)
+    .join(" ")
+    .concat("...");
 };
 
 function renderDate(date) {
@@ -86,14 +120,13 @@ function createNewBlog() {
 
 function renderAllPosts() {
   allPosts.forEach(function(post) {
-    const allPostsContainer = document.getElementById("all-posts-container");
-    post.render(allPostsContainer);
+    post.render(allPostsContainer, true);
   });
 }
 function renderSinglePost() {
   const post = allPosts[0];
   const homePageWrap = document.getElementById("home-page-wrap");
-  post.render(homePageWrap);
+  post.render(homePageWrap, false);
 }
 
 const header = document.querySelector("header");
@@ -110,6 +143,63 @@ function hideAll() {
     page.classList.add("hidden");
   });
 }
+
+function handleTitleClick(event) {
+  const id = event.target.dataset.id;
+  const currentPost = allPosts.find(function(post) {
+    return id === post.id;
+  });
+  removePosts();
+
+  currentPost.render(allPostsContainer, false);
+
+  const link = document.getElementById("back");
+  link.classList.remove("hidden");
+  link.addEventListener("click", handleBackToAllPosts);
+}
+
+function removePosts() {
+  const posts = document.querySelectorAll(".all-posts-page .post-container");
+  posts.forEach(function(post) {
+    post.remove();
+  });
+}
+
+function getAuthorClickHandlerForPost(post) {
+  return function handleAuthorCick(event) {
+    const author = event.target.dataset.author;
+    const postsByAuthor = allPosts.filter(function(post) {
+      return author === post.author;
+    });
+    removePosts();
+
+    postsByAuthor.forEach(function(post) {
+      post.render(allPostsContainer, true);
+    });
+    const authorDiv = document.getElementById("authorName");
+    authorDiv.classList.remove("hidden");
+    post.showUserAuthorsName(authorDiv);
+
+    const link = document.getElementById("back");
+    link.classList.remove("hidden");
+    link.addEventListener("click", handleBackToAllPosts);
+  };
+}
+
+function handleBackToAllPosts() {
+  const link = document.getElementById("back");
+  removePosts();
+  renderAllPosts();
+  link.classList.add("hidden");
+
+  removeAuthName();
+}
+
+function removeAuthName() {
+  const authNameRemoved = document.getElementById("show-now");
+  authNameRemoved.remove();
+}
+
 header.addEventListener("click", handleNav);
 
 createNewBlog();
@@ -128,43 +218,13 @@ function submitForm(event) {
 }
 
 function validateForm(event) {
-  var firstNameIsValid = validateFirstName(event);
-  if (!firstNameIsValid) {
-    return false;
-  }
-
-  var lastNameIsValid = validateLastName(event);
-  if (!lastNameIsValid) {
-    return false;
-  }
-
-  var addressIsValid = validateAddress(event);
-  if (!addressIsValid) {
-    return false;
-  }
-
-  var cityIsValid = validateCity(event);
-  if (!cityIsValid) {
-    return false;
-  }
-
-  var stateIsValid = validateState(event);
-  if (!stateIsValid) {
-    return false;
-  }
-
-  var zipcodeIsValid = validateZipcode(event);
-  if (!zipcodeIsValid) {
+  var userNameIsValid = validateUserName(event);
+  if (!userNameIsValid) {
     return false;
   }
 
   var emailIsValid = validateEmail(event);
   if (!emailIsValid) {
-    return false;
-  }
-
-  var phoneIsValid = validatePhoneNumber(event);
-  if (!phoneIsValid) {
     return false;
   }
 
@@ -180,110 +240,37 @@ var userform = document.querySelector("form");
 userform.addEventListener("submit", submitForm);
 
 function renderUserInputEach(value) {
-  var printParent = document.getElementById("print");
-
+  var printParent = document.getElementById("contact-print-user-info");
   var eachInputField = document.createElement("div");
   eachInputField.textContent = value;
   printParent.appendChild(eachInputField);
 }
 
 function renderUserInputAll(event) {
-  var firstLineContent = ` Thank you for registering. You have created an account as:
-        ${event.target.firstname.value} ${event.target.lastname.value}`;
-
-  var secondLineContent = `Your contact information:`;
-
-  var thirdLineContent = `Address: ${event.target.address.value} ${
-    event.target.city.value
-  }
-        ${event.target.state.value} ${event.target.zipcode.value}`;
-
-  var fourthLineContent = `Phone: ${event.target.phone.value}`;
-
-  var fifthLineContent = `Email: ${event.target.email.value}`;
+  var firstLineContent = ` Thank you ${
+    event.target.username.value
+  } for creating an account.`;
+  var secondLineContent = `The Email you have provided is: ${
+    event.target.email.value
+  }`;
 
   renderUserInputEach(firstLineContent);
   renderUserInputEach(secondLineContent);
-  renderUserInputEach(thirdLineContent);
-  renderUserInputEach(fourthLineContent);
-  renderUserInputEach(fifthLineContent);
 }
 
-function validateFirstName(event) {
-  var first = event.target.firstname.value;
+function validateUserName(event) {
+  var username = event.target.username.value;
 
-  if (!first.match(/^[a-zA-Z]+$/)) {
-    alert("Only letters are allowed for first name.");
+  if (!username.match(/^[\w\W\d]+$/)) {
+    alert("User Name field is empty");
+    return false;
+  }
+  if (username.length < 10) {
+    alert("User Name must be minimum 10 characters/digits");
     return false;
   }
 
   return true;
-}
-
-function validateLastName(event) {
-  var last = event.target.lastname.value;
-
-  if (!last.match(/^[a-zA-Z]+$/)) {
-    alert("Only letters are allowed for last name.");
-    return false;
-  }
-
-  return true;
-}
-
-function validateAddress(event) {
-  var address = event.target.address.value;
-
-  if (address.length == 0) {
-    alert("Address is required");
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function validateCity(event) {
-  var city = event.target.city.value;
-
-  if (city !== null && city !== "") {
-    return true;
-  } else {
-    alert("City is required");
-    return false;
-  }
-}
-
-function validateState(event) {
-  var state = event.target.state.value;
-
-  if (state.length === 2 && state.match(/^[a-zA-Z]+$/)) {
-    return true;
-  } else {
-    alert("2 letters required for state");
-    return false;
-  }
-}
-
-function validateZipcode(event) {
-  var zipcode = event.target.zipcode.value;
-
-  if (zipcode.length === 5 && zipcode.match(/^\d+/)) {
-    return true;
-  } else {
-    alert("5 numeric characters required for zipcode");
-    return false;
-  }
-}
-
-function validatePhoneNumber(event) {
-  var phone = event.target.phone.value;
-
-  if (phone.match(/^[0-9]{10}$/)) {
-    return true;
-  } else {
-    alert("10 numeric characters required for phone number");
-    return false;
-  }
 }
 
 function validateEmail(event) {
@@ -311,7 +298,7 @@ function validatePassword(event) {
     alert("Confirm Password must be minimum 8 characters.");
     return false;
   }
-  if (verifyPswd == confirmPswd) {
+  if (verifyPswd === confirmPswd) {
     return true;
   } else {
     alert("Please verify Password and Confirm Password match");
