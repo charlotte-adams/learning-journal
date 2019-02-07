@@ -49,20 +49,32 @@ BlogPost.prototype.renderAuthor = function(parent) {
   anchorAuthor.addEventListener("click", getAuthorClickHandlerForPost(this));
 };
 
-BlogPost.prototype.showUserAuthorsName = function(parent) {
-  const showAuthorName = document.createElement("div");
-  showAuthorName.dataset.author = this.author;
-  showAuthorName.id = "show-now";
-  showAuthorName.className = "show-author-name";
-  showAuthorName.textContent = `Showing all posts by: ${this.author}`;
-  parent.appendChild(showAuthorName);
+BlogPost.prototype.showUserFilter = function(parent, content) {
+  const showFilterName = document.createElement("div");
+  showFilterName.textContent = content;
+  showFilterName.id = "show-filter";
+  parent.appendChild(showFilterName);
 };
 
 BlogPost.prototype.renderTags = function(parent) {
-  const tags = document.createElement("span");
-  tags.className = "post-tags";
-  tags.textContent = `Key Words: ${this.tags}`;
-  parent.appendChild(tags);
+  const container = document.createElement("div");
+  const keyWords = document.createElement("span");
+  keyWords.textContent = "Key Words: ";
+  container.appendChild(keyWords);
+
+  this.tags.forEach(tag => {
+    const spanTag = document.createElement("span");
+    const anchorTag = document.createElement("a");
+    anchorTag.href = "#";
+    anchorTag.dataset.tag = tag;
+    anchorTag.className = "clickable-tag";
+    anchorTag.textContent = tag;
+    spanTag.appendChild(anchorTag);
+    container.appendChild(spanTag);
+    anchorTag.addEventListener("click", getTagClickHandlerForPost(this));
+  });
+
+  parent.appendChild(container);
 };
 
 BlogPost.prototype.renderCreatedOn = function(parent) {
@@ -138,17 +150,18 @@ function hideAll() {
 }
 
 function handleTitleClick(event) {
-  const id = event.target.dataset.id;
+  const id = parseInt(event.target.dataset.id);
+
   const currentPost = allPosts.find(function(post) {
     return id === post.id;
   });
-  removePosts();
 
+  removePosts();
   currentPost.render(allPostsContainer, false);
 
   const link = document.getElementById("back");
   link.classList.remove("hidden");
-  link.addEventListener("click", handleBackToAllPosts);
+  link.addEventListener("click", handleBackToAllPostsFromFilter);
 }
 
 function removePosts() {
@@ -158,39 +171,67 @@ function removePosts() {
   });
 }
 
+function getTagClickHandlerForPost(post) {
+  return function handleTagClick(event) {
+    const tag = event.target.dataset.tag;
+    const matchingPosts = allPosts.filter(function(post) {
+      return post.tags.includes(tag);
+    });
+    removePosts();
+
+    matchingPosts.forEach(function(post) {
+      post.render(allPostsContainer, true);
+    });
+
+    const tagDiv = document.getElementById("authAndTagDiv");
+    const content = `Showing all posts filtered by: ${tag}`;
+    removeFilter();
+    post.showUserFilter(tagDiv, content);
+
+    const link = document.getElementById("back");
+    link.classList.remove("hidden");
+    link.addEventListener("click", handleBackToAllPostsFromFilter);
+  };
+}
+
 function getAuthorClickHandlerForPost(post) {
   return function handleAuthorCick(event) {
     const author = event.target.dataset.author;
     const postsByAuthor = allPosts.filter(function(post) {
       return author === post.author;
     });
+
     removePosts();
 
     postsByAuthor.forEach(function(post) {
       post.render(allPostsContainer, true);
     });
-    const authorDiv = document.getElementById("authorName");
-    authorDiv.classList.remove("hidden");
-    post.showUserAuthorsName(authorDiv);
+
+    const authorDiv = document.getElementById("authAndTagDiv");
+    const content = `Showing all posts by: ${post.author}`;
+    removeFilter();
+    post.showUserFilter(authorDiv, content);
 
     const link = document.getElementById("back");
     link.classList.remove("hidden");
-    link.addEventListener("click", handleBackToAllPosts);
+    link.addEventListener("click", handleBackToAllPostsFromFilter);
   };
 }
 
-function handleBackToAllPosts() {
+function removeFilter() {
+  const filterRemoved = document.getElementById("show-filter");
+  if (filterRemoved !== null) {
+    filterRemoved.remove();
+  }
+}
+
+function handleBackToAllPostsFromFilter() {
   const link = document.getElementById("back");
   removePosts();
   renderAllPosts();
   link.classList.add("hidden");
 
-  removeAuthName();
-}
-
-function removeAuthName() {
-  const authNameRemoved = document.getElementById("show-now");
-  authNameRemoved.remove();
+  removeFilter();
 }
 
 header.addEventListener("click", handleNav);

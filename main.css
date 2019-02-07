@@ -52,6 +52,9 @@ body {
 .hidden {
   display: none;
 }
+.clickable-tag {
+  margin-right: 5px;
+}
 
 @media (min-width: 600px) {
   .post-container {
